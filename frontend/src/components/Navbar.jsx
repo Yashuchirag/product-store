@@ -5,9 +5,12 @@ import { LuSun } from "react-icons/lu";
 import { Link } from "react-router-dom";
 
 
+
+
 const Navbar = () => { 
   const { toggleColorMode, colorMode } = useColorMode();
-
+  
+  
   
   return ( 
     <Container maxW={"1140px"} px={4} >
