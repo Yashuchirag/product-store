@@ -2,9 +2,10 @@ import {
     Box, Image, Heading, Button,
     Text, HStack, IconButton, 
     Input, Modal, ModalContent, 
-    ModalBody, ModalFooter,
+    ModalBody, ModalFooter, AspectRatio,
     ModalHeader, ModalOverlay, ModalCloseButton, 
-    useDisclosure, useToast, useColorModeValue
+    useDisclosure, useToast, useColorModeValue,
+    Flex
 } from "@chakra-ui/react";
 import { MdEdit, MdDelete } from "react-icons/md";
 import useProductStore from "../store/product";
@@ -73,16 +74,22 @@ const ProductCard = ({product}) => {
         }}
         bg={bg}
         >
-            <Image src={product.image} alt={product.name} boxSize={"250px"} objectFit={"cover"} borderRadius={"lg"}/>
+            <Flex justify={"center"} align={"center"}>
+                <AspectRatio ratio={4 / 3} boxSize={"250px"}>
+                    <Image src={product.image} alt={product.name} objectFit={"cover"} borderRadius={"lg"}/>
+                </AspectRatio>
+            </Flex>
             <Box p={4}>
-                <Heading as="h2" fontSize={"lg"} fontWeight={"bold"}>{product.name}</Heading>
+                <Heading as="h2" fontSize={"lg"} fontWeight={"bold"} >{product.name}</Heading>
 
-                <Text fontWeight={"bold"} fontSize={"md"} color={textColor}>{product.price}</Text>
+                <Text fontWeight={"bold"} fontSize={"md"} color={textColor} fontStyle={"italic"}>{`Price: $${product.price}`}</Text>
 
+                <Flex justifyContent={"flex-end"}>
                 <HStack>
                     <IconButton icon={<MdEdit />} onClick={onOpen} colorScheme="blue" ></IconButton>
-                    <IconButton icon={<MdDelete />} onClick={() => handleDeleteProduct(product._id)} colorScheme="red"></IconButton>
+                    <IconButton icon={<MdDelete />} onClick={() => handleDeleteProduct(product._id)} colorScheme="red" ></IconButton>
                 </HStack>
+                </Flex>
             </Box>
 
             <Modal isOpen={isOpen} onClose={onClose}>
